@@ -21,27 +21,29 @@ fn update_name2<'a>(mut p: Person2<'a>, name: &'a String) -> Person2<'a> {
 }
 
 fn main() {
-    let name1 = String::from("Bob");
+    // Update the "name" value on the Person struct
+    let bob = String::from("Bob");
 
-    let p1 = Person {
+    let person1 = Person {
         name: String::new(),
     };
 
     let now = Instant::now();
-    update_name(p1, name1);
+    update_name(person1, bob);
     let time = now.elapsed();
     println!("{time:?} to update name to Bob");
 
 
+    // Now instead of updating the value, simply update the reference
+    // This is much faster than the value assignment
+    let tom = String::from("Tom");
 
-    let name12 = String::from("Tom");
-
-    let p12 = Person2 {
+    let person2 = Person2 {
         name: &String::new(),
     };
 
     let now = Instant::now();
-    update_name2(p12, &name12);
+    update_name2(person2, &tom);
     let time2 = now.elapsed();
     println!("{time2:?} to update name to Tom");
 }
